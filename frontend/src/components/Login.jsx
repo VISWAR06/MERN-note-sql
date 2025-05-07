@@ -15,7 +15,7 @@ const Login = () => {
     if (!res.success) {
       setErr(res.message);
     } else {
-      navigate('/');
+      navigate('/dashboard');
     }
   };
 
