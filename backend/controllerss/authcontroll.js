@@ -48,7 +48,11 @@ try{
         })
     }
     const token=jwt.sign({id:user.id},process.env.JWT_SECRET,{expiresIn:process.env.JWT_EXPIRE})
-    console.log(token)
+    res.cookie("token", token, {
+        httpOnly: true,
+        expires: new Date(Date.now() + process.env.COOKIE_EXP * 24 * 60 * 60 * 1000),
+      });
+     
     res.status(200).json({
         msg:"loged in successfully"
     })
