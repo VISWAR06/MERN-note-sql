@@ -1,8 +1,9 @@
 const express=require('express')
-const { register } = require('../controllerss/authcontroll')
+const { register,login } = require('../controllerss/authcontroll')
 const route=express.Router()
 
 
 route.post('/register',register)
+route.post('/login',login)
 
 module.exports= route

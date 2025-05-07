@@ -30,7 +30,32 @@ res.status(201).json({
 }
 
 
+const login= async(req,res)=>{
+try{
+    const{username,password}=req.body
+    const [users]=await db.query("select * from users where email=? or username=?",[username,username])
+    if(users.length===0){
+        res.status(400).json({
+            msg:"not registerd"
+        })
+    }
+    const user=users[0]
+    const check= await enct.compare(password,user.password)
+    if(!check){
+        return res.status(400).json({
+            msg:"invalid passwrod"
+        })
+    }
+    res.status(200).json({
+        msg:"loged in successfully"
+    })
+
+}catch(e){
+    res.status(500).json({
+        msg:"server side error"+e.message
+    })
+}
+}
 
 
-
-module.exports={register}
+module.exports={register,login}
