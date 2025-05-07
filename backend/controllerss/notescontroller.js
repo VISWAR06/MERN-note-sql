@@ -15,7 +15,32 @@ const create=async(req,res)=>{
     }
 
 }
+const getnote= async(req,res)=>{
+    try{
+        const userid=req.user.id
+        const[notes]=await db.query("select * from notes where userid=?",[userid])
+        res.json({
+            notes
+        })
 
+    }
+    catch(e){
+        res.status(500).json({
+            msg:e.message
+        })
+    }
+}
 
+const update=async(req,res)=>{
+    try{
+const userid=req.user.id
+const{notes}
+    }
+    catch(e){
+        res.status(500).json({
+            msg:e.message
+        })
+    }
+}
 
-module.exports={create}
+module.exports={create,getnote,update}
