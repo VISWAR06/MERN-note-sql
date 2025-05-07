@@ -63,6 +63,18 @@ try{
     })
 }
 }
+const curruser=async(req,res)=>{
+   try{
+const userid=req.user.id
+const [users]=await db.query("select id,username,contact,email from users where id=?",[userid])
+if(users.length===0)return res.status(500).json({
+    msg:"no user "
+})
+res.json(users[0])
+   }catch(err){
+res.status(500).json({msg:"server side prblem"})
+   }
+}
 
 
-module.exports={register,login}
+module.exports={register,login,curruser}
