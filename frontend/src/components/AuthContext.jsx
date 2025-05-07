@@ -1,5 +1,5 @@
-import { createContext, useState, useEffect } from "react";
-import axios from "axios";
+import { createContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 export const AuthContext = createContext(null);
 
@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/auth/me", {
+        const res = await axios.get('http://localhost:5000/api/auth/me', {
           withCredentials: true,
         });
         setCurrentUser(res.data);
@@ -26,11 +26,11 @@ export const AuthProvider = ({ children }) => {
   const login = async (username, password) => {
     try {
       await axios.post(
-        "http://localhost:5000/api/auth/login",
+        'http://localhost:5000/api/auth/login',
         { username, password },
         { withCredentials: true }
       );
-      const res = await axios.get("http://localhost:5000/api/auth/me", {
+      const res = await axios.get('http://localhost:5000/api/auth/me', {
         withCredentials: true,
       });
       setCurrentUser(res.data);
@@ -38,17 +38,19 @@ export const AuthProvider = ({ children }) => {
     } catch (err) {
       return {
         success: false,
-        message: err.response?.data?.msg || "Login failed",
+        message: err.response?.data?.msg || 'Login failed',
       };
     }
   };
 
   const logout = async () => {
     try {
-      await axios.post("http://localhost:5000/api/auth/logout", {}, {
+      await axios.post('http://localhost:5000/api/auth/logout', {}, {
         withCredentials: true,
       });
-    } catch {}
+    } catch(e) {
+      console.log(e.message)
+    }
     setCurrentUser(null);
   };
 
