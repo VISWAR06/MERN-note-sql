@@ -50,5 +50,21 @@ res.status(200).json("note updated")
         })
     }
 }
+const del=async(req,res)=>{
+try{
+    const userid=req.user.id
+    const noteid=req.params.id
+    const [result]=await db.query('delete from notes where userid=? and noteid=?',[userid,noteid])
+    if(result.affectedRows===0){
+        res.json("no noted in id")
+    }
+    res.json("delted success")
+}
+ catch(e){
+        res.status(500).json({
+            msg:e.message
+        })
+    }
+}
 
-module.exports={create,getnote,update}
+module.exports={create,getnote,update,del}
