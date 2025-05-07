@@ -1,5 +1,6 @@
 const db=require('../db')
 const enct=require('bcryptjs')
+const jwt=require('jsonwebtoken')
 const register= async(req,res)=>{
   try{
     const {username,password,contact,email}=req.body
@@ -46,6 +47,8 @@ try{
             msg:"invalid passwrod"
         })
     }
+    const token=jwt.sign({id:user.id},process.env.JWT_SECRET,{expiresIn:process.env.JWT_EXPIRE})
+    console.log(token)
     res.status(200).json({
         msg:"loged in successfully"
     })
