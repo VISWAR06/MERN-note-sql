@@ -1,13 +1,25 @@
+
 import React from 'react'
-import {BrowserRouter,Route,Routes}from'react-router-dom'
+import Navbar from './components/Navbar'
+import Dashboard from './components/Dashboard'
+import Profile from './components/Profile'
+import Login from './components/Login'
+import Register from './components/Register'
+import { BrowserRouter,Routes,Route } from 'react-router-dom'
+
 const App = () => {
   return (
-  <BrowserRouter>
-  <Navbar/>
-  <Routes>
-
-  </Routes>
-  </BrowserRouter>
+    <BrowserRouter>
+    <Navbar/>
+    <Routes>
+<Route path='/dashboard' element={<Dashboard/>} />
+<Route path='/register' element={<Register/>} />
+<Route path='/login' element={<Login/>} />
+<Route path='/profile' element={<Profile/>} />
+<Route path='/dashboard' element={<Dashboard/>} />
+    </Routes>
+    </BrowserRouter>
+   
   )
 }
 
