@@ -2,7 +2,7 @@ const express=require('express')
 const route=express.Router()
 const auth = require('../middleware/auth')
 const {create} = require('../controllerss/notescontroller')
-const { getnote } = require('../controllerss/notescontroller')
+const { getnote ,update} = require('../controllerss/notescontroller')
 
 
 

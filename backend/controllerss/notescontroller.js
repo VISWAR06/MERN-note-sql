@@ -34,7 +34,15 @@ const getnote= async(req,res)=>{
 const update=async(req,res)=>{
     try{
 const userid=req.user.id
-const{notes}
+const{notes}=req.body
+const noteid=req.params.id
+const[result]=await db.query("update notes set note=? where userid=? and noteid=?",[notes,userid,noteid])
+if(result.affectedRows===0){
+    res.status(404).json({
+        msg:"no notes in that"
+    })
+}
+res.status(200).json("note updated")
     }
     catch(e){
         res.status(500).json({
