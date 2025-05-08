@@ -1,3 +1,4 @@
+
 const sql = require('mysql2/promise');
 require('dotenv').config();
 
@@ -8,11 +9,11 @@ const db = sql.createPool({
   database: process.env.DB_DATABASE,
 });
 
+db.getConnection().then((connection) => {
+  console.log("Connected to database");
+  connection.release();
+}).catch((err) => {
+  console.log("Not connected: " + err.message);
+});
 
-db.getConnection().then((connection)=>{
-    console.log("connectd")
-    connection.release()
-}).catch((err)=>{
-    console.log("not connected: "+err.message)
-})
-module.exports = db;
+module.exports = db

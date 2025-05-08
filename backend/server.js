@@ -1,27 +1,26 @@
+
 const express = require('express');
-const cookiepar=require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const app = express();
 require('dotenv').config();
-app.use(cookiepar())
-app.use(express.json())
-app.use(express.urlencoded({extended:false}))
+
+app.use(cors({
+  origin: 'http://localhost:5173', 
+  credentials: true,
+}));
+app.use(cookieParser());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 const port = process.env.PORT || 3000;
-const authroute=require('./routes/authroutes')
-const notesroute=require('./routes/notesroute')
-app.use('/api/auth',authroute)
-app.use('/api/notes',notesroute)
+const authroute = require('./routes/authroutes');
+const notesroute = require('./routes/notesroute');
 
+app.use('/api/auth', authroute);
+app.use('/api/notes', notesroute);
 
-
-
-
-
-
-
-
-
-
-app.listen(3000, () => {
-  console.log(`running in ${port}`);
+app.listen(port, () => {
+  console.log(`Running on port ${port}`);
 });
